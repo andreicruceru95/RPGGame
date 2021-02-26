@@ -27,6 +27,7 @@ namespace GameTest
         protected override void Initialize()
         {
             graphics.PreferredBackBufferWidth = (int)GameTest.ScreenManager.Instance.Dimensions.X;
+            graphics.PreferredBackBufferHeight = (int)GameTest.ScreenManager.Instance.Dimensions.Y;
             graphics.ApplyChanges();
             base.Initialize();
         }
