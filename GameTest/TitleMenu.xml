@@ -4,7 +4,7 @@
 	<Effects>FadeEffect</Effects>	
 	<Item>
 		<LinkType>Screen</LinkType>
-		<LinkID>SplashScreen</LinkID>
+		<LinkID>GameplayScreen</LinkID>
 		<Image>
 			<Text>New Game</Text>
 		</Image>

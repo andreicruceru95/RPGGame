@@ -26,6 +26,7 @@ namespace GameTest
         public string Effects;
 
         public FadeEffect FadeEffect;
+        public SpriteSheetEffect SpriteSheetEffect;
 
         void SetEffect<T>(ref T effect)
         {
@@ -138,6 +139,7 @@ namespace GameTest
 
 
             SetEffect<FadeEffect>(ref FadeEffect);
+            SetEffect<SpriteSheetEffect>(ref SpriteSheetEffect);
 
             if (Effects != String.Empty)
             {
