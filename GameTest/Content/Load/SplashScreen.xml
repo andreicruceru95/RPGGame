@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SplashScreen>
+	<Image>
+		<Path>C:\Users\andre\source\repos\GameTest\GameTest\Content\bin\DesktopGL\Title</Path>
+		<Effects>FadeEffect</Effects>
+		<IsActive>true</IsActive>
+		<FadeEffect>
+			<FadeSpeed>0.5</FadeSpeed>
+		</FadeEffect>
+	</Image>	
+</SplashScreen>

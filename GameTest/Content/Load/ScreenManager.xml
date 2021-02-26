@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ScreenManager>
+	<Image>
+		<Path>C:\Users\andre\source\repos\GameTest\GameTest\Content\ScreenManager\FadedImage</Path>
+		<Effects>FadeEffect</Effects>
+		<Scale>
+			<X>1000</X>
+			<Y>720</Y>
+		</Scale>
+	</Image>
+</ScreenManager>
