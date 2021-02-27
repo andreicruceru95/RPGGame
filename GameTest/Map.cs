@@ -17,7 +17,7 @@ namespace GameTest
         public Map()
         {
             Layer = new List<Layer>();
-            TileDimensions = Vector2.Zero;
+            TileDimensions = new Vector2(32, 32);
         }
 
         public void LoadContent()

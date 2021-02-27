@@ -50,7 +50,7 @@ namespace GameTest
                         int value1 = int.Parse(str.Substring(0, str.IndexOf(':')));
                         int value2 = int.Parse(str.Substring(str.IndexOf(':') + 1));
 
-                        tiles[^1].LoadContent(position, new Rectangle(
+                        tiles[tiles.Count - 1].LoadContent(position, new Rectangle(
                             value1 * (int)tileDimensions.X, value2 * (int)tileDimensions.Y,
                             (int)tileDimensions.X, (int)tileDimensions.Y));
                     }
