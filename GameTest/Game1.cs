@@ -26,8 +26,8 @@ namespace GameTest
         /// </summary>
         protected override void Initialize()
         {
-            graphics.PreferredBackBufferWidth = (int)GameTest.ScreenManager.Instance.Dimensions.X;
-            graphics.PreferredBackBufferHeight = (int)GameTest.ScreenManager.Instance.Dimensions.Y;
+            graphics.PreferredBackBufferWidth = (int)ScreenManager.Instance.Dimensions.X;
+            graphics.PreferredBackBufferHeight = (int)ScreenManager.Instance.Dimensions.Y;
             graphics.ApplyChanges();
             base.Initialize();
         }
@@ -79,7 +79,7 @@ namespace GameTest
         {
             GraphicsDevice.Clear(Color.Black);
 
-            spriteBatch.Begin();
+            spriteBatch.Begin(transformMatrix: ScreenManager.Instance.Camera.Transform) ;
             ScreenManager.Instance.Draw(spriteBatch);
             spriteBatch.End();
 

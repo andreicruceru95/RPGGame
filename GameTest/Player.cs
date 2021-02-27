@@ -5,6 +5,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended;
+using System.Xml.Serialization;
 
 namespace GameTest
 {
@@ -15,7 +17,7 @@ namespace GameTest
         public float MoveSpeed;
         public Player()
         {
-            Velocity = Vector2.Zero;
+            Velocity = new Vector2(50, 50);
         }
         public void LoadContent()
         {
@@ -31,12 +33,13 @@ namespace GameTest
             //Don't allow to move diagonaly
             if (Velocity.X == 0)
             {
-                if (InputManager.Instance.KeyDown(Keys.Down))
+                if (InputManager.Instance.KeyDown(Keys.S))
                 {
                     Velocity.Y = MoveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     Image.SpriteSheetEffect.CurrentFrame.Y = 0;
+                    
                 }
-                else if (InputManager.Instance.KeyDown(Keys.Up))
+                else if (InputManager.Instance.KeyDown(Keys.W))
                 {
                     Velocity.Y = -MoveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     Image.SpriteSheetEffect.CurrentFrame.Y = 3;
@@ -47,12 +50,12 @@ namespace GameTest
 
             if (Velocity.Y == 0)
             {
-                if (InputManager.Instance.KeyDown(Keys.Right))
+                if (InputManager.Instance.KeyDown(Keys.D))
                 {
                     Velocity.X = MoveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    Image.SpriteSheetEffect.CurrentFrame.Y = 2;
+                    Image.SpriteSheetEffect.CurrentFrame.Y = 2;                    
                 }
-                else if (InputManager.Instance.KeyDown(Keys.Left))
+                else if (InputManager.Instance.KeyDown(Keys.A))
                 {
                     Velocity.X = -MoveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     Image.SpriteSheetEffect.CurrentFrame.Y = 1;

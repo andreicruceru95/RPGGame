@@ -26,7 +26,22 @@ namespace GameTest
 
         public Image Image;
         [XmlIgnore]
+        public static int ScreenWidth { get; private set; } = 1280;
+        [XmlIgnore]
+        public static int ScreenHeight { get; private set; } = 720;
+        [XmlIgnore]
+        public static Viewport viewport = new Viewport(100, 100, ScreenWidth, ScreenHeight);
+        
+        [XmlIgnore]
+        Camera camera = new Camera(viewport);
+        public Camera Camera
+        {
+            get { return camera; }
+        }
+
+        [XmlIgnore]
         public bool IsTransitioning { get; private set; }
+       
 
         public static ScreenManager Instance
         {
@@ -73,9 +88,12 @@ namespace GameTest
             }
         }
 
+        /// <summary>
+        /// This method will manage the current view screen.
+        /// </summary>
         public ScreenManager()
         {
-            Dimensions = new Vector2(1440, 720);
+            Dimensions = new Vector2(ScreenWidth, ScreenHeight);
             currentScreen = new SplashScreen();
             xmlGameScreenManager = new XmlManager<GameScreen>();
             xmlGameScreenManager.Type = currentScreen.Type;
@@ -97,6 +115,7 @@ namespace GameTest
 
         public void Update(GameTime gameTime)
         {
+            camera.UpdateCamera(viewport);
             currentScreen.Update(gameTime);
             Transition(gameTime);
         }
