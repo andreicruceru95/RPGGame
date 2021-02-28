@@ -17,6 +17,10 @@ namespace MapEditor
         {
             [XmlElement("Row")]
             public List<string> Row;
+            public TileMap()
+            {
+                Row = new List<string>();
+            }
         }
         Vector2 tileDimensions;
         List<List<Vector2>> tileMap;
@@ -24,6 +28,13 @@ namespace MapEditor
         public TileMap TileLayout;
         public Image Image;
 
+        public Layer()
+        {
+            
+            tileDimensions = new Vector2();
+            tileMap = new List<List<Vector2>>();
+            TileLayout = new TileMap();
+        }
         public void Initialize(ContentManager content, Vector2 tileDimensions)
         {
             //Add a rows to our tile map 
@@ -36,7 +47,7 @@ namespace MapEditor
                 {
                     int value1, value2;
                     //x means second layer
-                    if (!s.Contains('x'))
+                    if (s != String.Empty && !s.Contains('x'))
                     {
                         string str = s.Replace("[", String.Empty);
                         value1 = int.Parse(str.Substring(0, str.IndexOf(':')));
@@ -51,10 +62,26 @@ namespace MapEditor
                 }
                 tileMap.Add(tempTileMap);
             }
+
+            Image.Initialize(content);
+            this.tileDimensions = tileDimensions;
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-
+            for(int i = 0; i < tileMap.Count; i++)
+            {
+                for(int j = 0; j < tileMap[i].Count; j++)
+                {
+                    if(tileMap[i][j] != -Vector2.One)
+                    {
+                        Image.Position = new Vector2(j * tileDimensions.X, i * tileDimensions.Y);
+                        Image.SourceRect = new Rectangle((int)(tileMap[i][j].X * tileDimensions.X),
+                            (int)(tileMap[i][j].Y * tileDimensions.Y), (int)tileDimensions.X,
+                            (int)tileDimensions.Y);
+                        Image.Draw(spriteBatch);
+                    }
+                }
+            }
         }
     }
 }

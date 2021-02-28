@@ -99,7 +99,7 @@ namespace MapEditor
         {
             if (graphicsDeviceService != null)
             {
-                graphicsDeviceService.Release();
+                graphicsDeviceService.Release(true);
                 graphicsDeviceService = null;
             }
 

@@ -15,6 +15,8 @@ namespace GameTest
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.HardwareModeSwitch = false;
+            graphics.PreferMultiSampling = GameSettings.
             Content.RootDirectory = "Content";
         }
 
