@@ -11,8 +11,9 @@ namespace GameTest
     {
         Vector2 position;
         Rectangle sourceRect;
+        //define colision
         string state;
-
+        
         public Rectangle SourceRect
         {
             get { return sourceRect; }
@@ -21,6 +22,12 @@ namespace GameTest
         {
             get { return position; }
         }
+        /// <summary>
+        /// load tiles
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="sourceRect"></param>
+        /// <param name="state"></param>
         public void LoadContent(Vector2 position, Rectangle sourceRect, string state)
         {
             this.position = position;
@@ -28,10 +35,13 @@ namespace GameTest
             this.state = state;
         }
         public void UnloadCotent()
-        {
-
-        }
-        public void Update(GameTime gameTime, ref Player player)
+        { }
+        /// <summary>
+        /// Update game based on tile state
+        /// </summary>
+        /// <param name="gameTime"></param>
+        /// <param name="player"></param>
+        public void Update(GameTime gameTime, Player player)
         {
             if (state == "Solid")
             {

@@ -14,14 +14,18 @@ namespace GameTest
         public Rectangle Bounds { get; protected set; }
         public Rectangle VisibleArea { get; protected set; }
         public Matrix Transform { get; protected set; }
+        Player player;
+        bool followPlayer;
+        float row;
+        float col;
 
         private float currentMouseWheelValue, previousMouseWheelValue, zoom, previousZoom;
 
         public Camera(Viewport viewport)
         {
             Bounds = viewport.Bounds;
-            Zoom = 2f;
-            Position = Vector2.Zero;
+            Zoom = 1f;
+            Position = new Vector2(600, 330);
         }
 
 
@@ -42,7 +46,14 @@ namespace GameTest
                 MathHelper.Max(tl.Y, MathHelper.Max(tr.Y, MathHelper.Max(bl.Y, br.Y))));
             VisibleArea = new Rectangle((int)min.X, (int)min.Y, (int)(max.X - min.X), (int)(max.Y - min.Y));
         }
-
+        public void SetPlayer(Player player)
+        {
+            this.player = player;
+        }
+        public void SetView(bool followPlayer)
+        {
+            this.followPlayer = followPlayer;
+        }
         private void UpdateMatrix()
         {
             Transform = Matrix.CreateTranslation(new Vector3(-Position.X, -Position.Y, 0)) *
@@ -60,101 +71,122 @@ namespace GameTest
         public void AdjustZoom(float zoomAmount)
         {
             Zoom += zoomAmount;
-            if (Zoom < .35f)
+            if (Zoom < 1f)
             {
-                Zoom = .35f;
+                Zoom = 1f;
             }
-            if (Zoom > 2f)
+            if (Zoom > 1.5f)
             {
-                Zoom = 2f;
+                Zoom = 1.5f;
             }
         }
 
-        public void Follow(Player target)
-        {
-            var position = Matrix.CreateTranslation(
-                -target.Image.Position.X - (target.Image.SourceRect.Width / 2),
-                -target.Image.Position.Y - (target.Image.SourceRect.Height / 2),
-                0);
-            var offset = Matrix.CreateTranslation(640, 360, 0);
+        //public void Follow()
+        //{
+        //    var position = Matrix.CreateTranslation(
+        //        -player.Image.Position.X - (player.Image.SourceRect.Width / 2),
+        //        -player.Image.Position.Y - (player.Image.SourceRect.Height / 2),
+        //        0);
+        //    var offset = Matrix.CreateTranslation(640, 360, 0);
 
-            Transform = position * offset;
-        }
+        //    Transform = position * offset;
+        //}
 
         public void UpdateCamera(Viewport bounds)
         {
-            Bounds = bounds.Bounds;
-            UpdateMatrix();
-
-            Vector2 cameraMovement = Vector2.Zero;
-            int moveSpeed;
-
-            if (Zoom > .8f)
+            if (followPlayer)
             {
-                moveSpeed = 15;
-            }
-            else if (Zoom < .8f && Zoom >= .6f)
-            {
-                moveSpeed = 20;
-            }
-            else if (Zoom < .6f && Zoom > .35f)
-            {
-                moveSpeed = 25;
-            }
-            else if (Zoom <= .35f)
-            {
-                moveSpeed = 30;
+                //Vector2 newPosition = Vector2.Zero;
+                //row += player.Velocity.X;
+                //col += player.Velocity.Y;
+                //newPosition.X = row - 320;
+                //newPosition.Y = col - 180;
+                //Position = newPosition;
+                var position = Matrix.CreateTranslation(
+                -player.Image.Position.X - (player.Image.SourceRect.Width / 2),
+                -player.Image.Position.Y - (player.Image.SourceRect.Height / 2),
+                0);
+                var offset = Matrix.CreateTranslation(640, 360, 0);
+                
+                Transform = position * offset;                
             }
             else
             {
-                moveSpeed = 10;
+                Bounds = bounds.Bounds;
+                    
+
+                UpdateMatrix();
+
+                Vector2 cameraMovement = Vector2.Zero;
+                int moveSpeed;
+
+                if (Zoom > .8f)
+                {
+                    moveSpeed = 15;
+                }
+                else if (Zoom < .8f && Zoom >= .6f)
+                {
+                    moveSpeed = 20;
+                }
+                else if (Zoom < .6f && Zoom > .35f)
+                {
+                    moveSpeed = 25;
+                }
+                else if (Zoom <= .35f)
+                {
+                    moveSpeed = 30;
+                }
+                else
+                {
+                    moveSpeed = 10;
+                }
+
+
+                if (Keyboard.GetState().IsKeyDown(Keys.Up))
+                {
+                    cameraMovement.Y = -moveSpeed;
+                }
+
+                if (Keyboard.GetState().IsKeyDown(Keys.Down))
+                {
+                    cameraMovement.Y = moveSpeed;
+                }
+
+                if (Keyboard.GetState().IsKeyDown(Keys.Left))
+                {
+                    cameraMovement.X = -moveSpeed;
+                }
+
+                if (Keyboard.GetState().IsKeyDown(Keys.Right))
+                {
+                    cameraMovement.X = moveSpeed;
+                }
+
+                previousMouseWheelValue = currentMouseWheelValue;
+                currentMouseWheelValue = Mouse.GetState().ScrollWheelValue;
+
+                if (currentMouseWheelValue > previousMouseWheelValue)
+                {
+                    AdjustZoom(.05f);
+                    Console.WriteLine(moveSpeed);
+                }
+
+                if (currentMouseWheelValue < previousMouseWheelValue)
+                {
+                    AdjustZoom(-.05f);
+                    Console.WriteLine(moveSpeed);
+                }
+
+                previousZoom = zoom;
+                zoom = Zoom;
+                if (previousZoom != zoom)
+                {
+                    Console.WriteLine(zoom);
+
+                }
+
+                MoveCamera(cameraMovement);
             }
-
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Up))
-            {
-                cameraMovement.Y = -moveSpeed;
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Down))
-            {
-                cameraMovement.Y = moveSpeed;
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Left))
-            {
-                cameraMovement.X = -moveSpeed;
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Right))
-            {
-                cameraMovement.X = moveSpeed;
-            }
-
-            previousMouseWheelValue = currentMouseWheelValue;
-            currentMouseWheelValue = Mouse.GetState().ScrollWheelValue;
-
-            if (currentMouseWheelValue > previousMouseWheelValue)
-            {
-                AdjustZoom(.05f);
-                Console.WriteLine(moveSpeed);
-            }
-
-            if (currentMouseWheelValue < previousMouseWheelValue)
-            {
-                AdjustZoom(-.05f);
-                Console.WriteLine(moveSpeed);
-            }
-
-            previousZoom = zoom;
-            zoom = Zoom;
-            if (previousZoom != zoom)
-            {
-                Console.WriteLine(zoom);
-
-            }
-
-            MoveCamera(cameraMovement);
         }
     }
 }

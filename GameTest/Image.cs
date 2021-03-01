@@ -14,6 +14,7 @@ namespace GameTest
         public float Alpha;
         public string Text, FontName, Path;
         public Vector2 Position, Scale;
+        
         public Rectangle SourceRect;
         public bool IsActive;
         [XmlIgnore]

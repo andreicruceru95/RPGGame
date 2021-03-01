@@ -14,27 +14,47 @@ namespace GameTest
         public List<Layer> Layer;
         public Vector2 TileDimensions;
 
+        /// <summary>
+        /// Initialzize
+        /// </summary>
         public Map()
         {
+            //set layers and dimensions for each tile
             Layer = new List<Layer>();
             TileDimensions = new Vector2(32, 32);
         }
 
+        /// <summary>
+        /// load tiles
+        /// </summary>
         public void LoadContent()
         {
             foreach (Layer l in Layer)
                 l.LoadContent(TileDimensions);
         }
+        /// <summary>
+        /// unload tiles
+        /// </summary>
         public void UnloadContent()
         {
             foreach (Layer l in Layer)
                 l.UnloadContent();
         }
-        public void Update(GameTime gameTime, ref Player player)
+        /// <summary>
+        /// update map texture
+        /// </summary>
+        /// <param name="gameTime"></param>
+        /// <param name="player"></param>
+        public void Update(GameTime gameTime, Player player)
         {
             foreach (Layer l in Layer)
-                l.Update(gameTime, ref player);
+                l.Update(gameTime, player);
         }
+        /// <summary>
+        /// draw layers(underlay, overlay)
+        /// </summary>
+        /// <param name="spriteBatch"></param>
+        /// <param name="drawType"></param>
         public void Draw(SpriteBatch spriteBatch,string drawType)
         {
             foreach (Layer l in Layer)

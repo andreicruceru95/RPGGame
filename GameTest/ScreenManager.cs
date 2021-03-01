@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
 using System.IO;
+using Microsoft.Xna.Framework.Input;
 
 namespace GameTest
 {
@@ -17,6 +18,7 @@ namespace GameTest
         [XmlIgnore]
         public ContentManager Content { private set; get; }
         XmlManager<GameScreen> xmlGameScreenManager;
+        Player player;
 
         GameScreen currentScreen, newScreen;
         [XmlIgnore]
@@ -30,13 +32,17 @@ namespace GameTest
         [XmlIgnore]
         public static int ScreenHeight { get; private set; } = 720;
         [XmlIgnore]
-        public static Viewport viewport = new Viewport(100, 100, ScreenWidth, ScreenHeight);
+        public static Viewport viewport = new Viewport(0, 0, ScreenWidth, ScreenHeight);
         
         [XmlIgnore]
-        Camera camera = new Camera(viewport);
+        Camera camera = new Camera(viewport);        
         public Camera Camera
         {
             get { return camera; }
+        }
+        public void SetCameraView(bool view)
+        {
+            camera.SetView(view);
         }
 
         [XmlIgnore]
@@ -87,6 +93,11 @@ namespace GameTest
                 }
             }
         }
+
+        public void SetPlayer(Player player)
+        {
+            camera.SetPlayer(player);            
+        }        
 
         /// <summary>
         /// This method will manage the current view screen.

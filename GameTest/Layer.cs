@@ -9,8 +9,14 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameTest
 {
+    /// <summary>
+    /// This class will define the texture layers.
+    /// </summary>
     public class Layer
     {
+        /// <summary>
+        /// A list of tiles set as a row.
+        /// </summary>
         public class TileMap
         {
             [XmlElement("Row")]
@@ -20,12 +26,16 @@ namespace GameTest
                 Row = new List<string>();
             }
         }
+
         [XmlElement("TileMap")]
         public TileMap Tile;
         public Image Image;
         public string SolidTiles, OverlayTiles;
         List<Tile> underlayTiles, overlayTiles;
         string state;
+        /// <summary>
+        /// Initialize layer.
+        /// </summary>
         public Layer()
         {
             Image = new Image();
@@ -33,11 +43,16 @@ namespace GameTest
             overlayTiles = new List<Tile>();
             SolidTiles = OverlayTiles = String.Empty;
         }
+        /// <summary>
+        /// Load tiles
+        /// </summary>
+        /// <param name="tileDimensions"></param>
         public void LoadContent(Vector2 tileDimensions)
         {
             Image.LoadContent();
             Vector2 position = -tileDimensions;
 
+            //split the xml rows and assign the image direction for each one
             foreach(string row in Tile.Row)
             {
                 string[] split = row.Split(']');
@@ -74,19 +89,33 @@ namespace GameTest
                 }
             }
         }
+        /// <summary>
+        /// unload content
+        /// </summary>
         public void UnloadContent()
         {
             Image.UnloadContent();
         }
-        public void Update(GameTime gameTime, ref Player player)
+
+        /// <summary>
+        /// update the map, set tiles under/above player
+        /// </summary>
+        /// <param name="gameTime"></param>
+        /// <param name="player"></param>
+        public void Update(GameTime gameTime, Player player)
         {
             foreach(Tile tile in underlayTiles)
-                tile.Update(gameTime, ref player);
+                tile.Update(gameTime, player);
 
             foreach (Tile tile in overlayTiles)
-                tile.Update(gameTime, ref player);
+                tile.Update(gameTime, player);
 
         }
+        /// <summary>
+        /// draw tiles under/above player
+        /// </summary>
+        /// <param name="spriteBatch"></param>
+        /// <param name="drawType"></param>
         public void Draw(SpriteBatch spriteBatch, string drawType)
         {
             List<Tile> tiles;
@@ -96,7 +125,7 @@ namespace GameTest
                 tiles = overlayTiles;
             foreach(Tile tile in tiles)
             {
-                //Set position to silesheet
+                //Set position to tilesheet
                 Image.Position = tile.Position;
                 //set source to tilesheet
                 Image.SourceRect = tile.SourceRect;

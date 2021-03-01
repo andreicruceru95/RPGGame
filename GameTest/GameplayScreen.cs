@@ -11,7 +11,7 @@ namespace GameTest
     {
         Player player;
         Map map;
-        
+     
         public override void LoadContent()
         {
             base.LoadContent();
@@ -20,7 +20,8 @@ namespace GameTest
             player = playerLoader.Load("Load/Gameplay/Player.xml");
             map = mapLoader.Load("Load/Gameplay/Maps/Map1.xml");
             player.LoadContent();
-            map.LoadContent();            
+            map.LoadContent();
+            ScreenManager.Instance.SetPlayer(player);            
         }
 
         public override void UnloadContent()
@@ -34,7 +35,7 @@ namespace GameTest
         {
             base.Update(gameTime);
             player.Update(gameTime);
-            map.Update(gameTime, ref player);
+            map.Update(gameTime, player);            
         }
 
         public override void Draw(SpriteBatch spriteBatch)
