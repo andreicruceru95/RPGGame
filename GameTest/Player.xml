@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<Player>
-	<Image>
-		<Path>C:\Users\andre\source\repos\GameTest\GameTest\Content\bin\DesktopGL\player</Path>
-		<Effects>SpriteSheetEffect</Effects>
-	</Image>
-	<MoveSpeed>100</MoveSpeed>
-</Player>

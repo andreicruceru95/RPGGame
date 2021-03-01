@@ -3,9 +3,14 @@
 	<Image>
 		<Path>C:\Users\andre\source\repos\GameTest\GameTest\Content\ScreenManager\FadedImage</Path>
 		<Effects>FadeEffect</Effects>
+<Position><X>10</X><Y>10</Y></Position>
 		<Scale>
 			<X>1000</X>
 			<Y>720</Y>
 		</Scale>
 	</Image>
+<Dimensions>
+<X>1280</X>
+<Y>720</Y>
+</Dimensions>
 </ScreenManager>
