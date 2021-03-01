@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace GameTest
 {
@@ -11,6 +12,7 @@ namespace GameTest
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        SpriteBatch fixedSprite;
 
         public Game1()
         {
@@ -40,6 +42,7 @@ namespace GameTest
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            fixedSprite = new SpriteBatch(GraphicsDevice);
             ScreenManager.Instance.GraphicsDevice = GraphicsDevice;
             ScreenManager.Instance.SpriteBatch = spriteBatch;
             ScreenManager.Instance.LoadContent(Content);
@@ -78,9 +81,19 @@ namespace GameTest
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-            spriteBatch.Begin(transformMatrix: ScreenManager.Instance.Camera.Transform) ;
+            spriteBatch.Begin(transformMatrix: Camera.Instance.Transform) ;
             ScreenManager.Instance.Draw(spriteBatch);
             spriteBatch.End();
+            if(Camera.Instance.Player != null)
+            {
+                int X = (int)(Camera.Instance.Player.Image.Position.X);
+                int Y = (int)(Camera.Instance.Player.Image.Position.Y);
+                fixedSprite.Begin();
+                fixedSprite.DrawString(ScreenManager.Instance.Font, $"Energy: {Camera.Instance.Player.Energy}",
+                    new Vector2(10,10), Color.White);
+                fixedSprite.DrawString(ScreenManager.Instance.Font, $"{X} : {Y}", new Vector2(10, 25), Color.White);
+                fixedSprite.End();
+            }
 
             base.Draw(gameTime);
         }
