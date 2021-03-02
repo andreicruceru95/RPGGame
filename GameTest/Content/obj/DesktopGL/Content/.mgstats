@@ -1,0 +1,3 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Users/andre/source/repos/GameTest/GameTest/Content/ball.png","C:/Users/andre/source/repos/GameTest/GameTest/Content/bin/DesktopGL/Content/ball.xnb","TextureProcessor","Texture2DContent",8368,16469,0.2140151
+"C:/Users/andre/source/repos/GameTest/GameTest/Content/SmileyWalk.png","C:/Users/andre/source/repos/GameTest/GameTest/Content/bin/DesktopGL/Content/SmileyWalk.xnb","TextureProcessor","Texture2DContent",40026,262229,0.1444465

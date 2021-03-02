@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Profile>Reach</Profile>
+  <Platform>DesktopGL</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/Users/andre/source/repos/GameTest/GameTest/Content/../../../../../OneDrive/Desktop/Ground.png</File>
+    <File>C:/Users/andre/source/repos/GameTest/GameTest/Content/Ariel.spritefont</File>
+    <File>C:/Users/andre/source/repos/GameTest/GameTest/Content/FadedImage.png</File>
+    <File>C:/Users/andre/source/repos/GameTest/GameTest/Content/player.png</File>
+    <File>C:/Users/andre/source/repos/GameTest/GameTest/Content/Stats.png</File>
+    <File>C:/Users/andre/source/repos/GameTest/GameTest/Content/Textures.png</File>
+    <File>C:/Users/andre/source/repos/GameTest/GameTest/Content/Textures-Walls.png</File>
+  </SourceFiles>
+  <DestFiles>
+    <File>Ground.png</File>
+    <File>Arial.spritefont</File>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>
