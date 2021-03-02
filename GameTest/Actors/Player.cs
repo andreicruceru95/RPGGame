@@ -21,11 +21,13 @@ namespace GameTest
         {
             get{ return Math.Round(energy, 1); }
         }
+        VisualField V;
                 
         public Player()
         {            
             Velocity = Vector2.Zero;
-            RunSpeed = 10.0f;           
+            RunSpeed = 10.0f;
+            V = new VisualField(this);
         }
         /// <summary>
         /// Move player. 
@@ -126,6 +128,8 @@ namespace GameTest
             energy += gameTime.ElapsedGameTime.TotalSeconds * 0.2;
             if (energy > 2000)
                 energy = 2000;
+
+            V.Update();
         }
         public void Draw(SpriteBatch spriteBatch)
         {            
