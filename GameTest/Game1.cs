@@ -13,6 +13,7 @@ namespace GameTest
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         SpriteBatch fixedSprite;
+        MouseState state;
 
         public Game1()
         {
@@ -31,6 +32,7 @@ namespace GameTest
             graphics.PreferredBackBufferWidth = (int)ScreenManager.Instance.Dimensions.X;
             graphics.PreferredBackBufferHeight = (int)ScreenManager.Instance.Dimensions.Y;
             graphics.ApplyChanges();
+            IsMouseVisible = true;     
             base.Initialize();
         }
 
@@ -70,6 +72,7 @@ namespace GameTest
                 this.Exit();
 
             ScreenManager.Instance.Update(gameTime);
+            state = Mouse.GetState();
 
             base.Update(gameTime);
         }
@@ -81,8 +84,11 @@ namespace GameTest
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-            spriteBatch.Begin(transformMatrix: Camera.Instance.Transform) ;
+            spriteBatch.Begin(transformMatrix: Camera.Instance.Transform);
+
             ScreenManager.Instance.Draw(spriteBatch);
+            if (state.LeftButton == ButtonState.Pressed)
+                spriteBatch.DrawString(ScreenManager.Instance.Font, $"{state.X} : {state.Y}", new Vector2(50,50), Color.White);
             spriteBatch.End();
             if(Camera.Instance.Player != null)
             {
@@ -92,6 +98,7 @@ namespace GameTest
                 fixedSprite.DrawString(ScreenManager.Instance.Font, $"Energy: {Camera.Instance.Player.Energy}",
                     new Vector2(10,10), Color.White);
                 fixedSprite.DrawString(ScreenManager.Instance.Font, $"{X} : {Y}", new Vector2(10, 25), Color.White);
+                
                 fixedSprite.End();
             }
 

@@ -16,6 +16,7 @@ namespace GameTest
         public Vector2 Position, Scale;
         
         public Rectangle SourceRect;
+        //private Vector2 centre;
         public bool IsActive;
         [XmlIgnore]
         public Texture2D Texture;
@@ -28,6 +29,10 @@ namespace GameTest
 
         public FadeEffect FadeEffect;
         public SpriteSheetEffect SpriteSheetEffect;
+        //public Vector2 Centre
+        //{
+        //    get { return new Vector2(SourceRect.Center.X, SourceRect.Center.Y); }
+        //}
 
         void SetEffect<T>(ref T effect)
         {
@@ -121,7 +126,7 @@ namespace GameTest
             else
                 dimensions.Y = font.MeasureString(Text).Y;
 
-            if (SourceRect == Rectangle.Empty)
+            if (SourceRect == Rectangle.Empty)                
                 SourceRect = new Rectangle(0, 0, (int)dimensions.X, (int)dimensions.Y);
 
             renderTarget = new RenderTarget2D(ScreenManager.Instance.GraphicsDevice,

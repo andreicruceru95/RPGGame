@@ -11,8 +11,21 @@ namespace GameTest
     {
         Vector2 position;
         Rectangle sourceRect;
+        Vector2 xyCoord;
+        
+        //walking cost from the start node
+        public int GCost { get; set; }
+        //estimate distance to end node
+        public int HCost { get; set; }
+        //GCost + HCost
+        public int FCost { get; set; }
+        public Tile CameFromTile { get; set; }
         //define colision
         string state;
+        public string State { get; set; }
+        //{
+        //    get { return state; }
+        //}
         
         public Rectangle SourceRect
         {
@@ -21,6 +34,21 @@ namespace GameTest
         public Vector2 Position
         {
             get { return position; }
+        }
+        public Vector2 XYCoord
+        {
+            get { return xyCoord; }
+        }
+        public Vector2 TileCentre
+        {
+            get
+            {
+                return position + new Vector2(16, 16);
+            }
+        }
+        public void CalculateFCost()
+        {
+            FCost = GCost + HCost;
         }
         /// <summary>
         /// load tiles
@@ -33,6 +61,7 @@ namespace GameTest
             this.position = position;
             this.sourceRect = sourceRect;
             this.state = state;
+            xyCoord = new Vector2(position.X / sourceRect.Width, position.Y / sourceRect.Height);
         }
         public void UnloadCotent()
         { }
@@ -43,7 +72,7 @@ namespace GameTest
         /// <param name="player"></param>
         public void Update(GameTime gameTime, Player player)
         {
-            if (state == "Solid")
+            if (state == "Solid" && player.keyboardMode)
             {
                 Rectangle tileRect = new Rectangle((int)Position.X, (int)Position.Y, sourceRect.Width, sourceRect.Height);
                 Rectangle playerRect = new Rectangle((int)player.Image.Position.X, (int)player.Image.Position.Y,
@@ -67,10 +96,6 @@ namespace GameTest
                     player.Velocity = Vector2.Zero;
                 }
             }
-        }
-        public void Draw(SpriteBatch spriteBatch)
-        {
-
-        }
+        }        
     }
 }

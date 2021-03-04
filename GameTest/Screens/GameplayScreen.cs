@@ -18,11 +18,14 @@ namespace GameTest
             XmlManager<Player> playerLoader = new XmlManager<Player>();
             XmlManager<Map> mapLoader = new XmlManager<Map>();
             player = playerLoader.Load("Load/Gameplay/Player.xml");
-            map = mapLoader.Load("Load/Gameplay/Maps/Map1.xml");
+            //map = mapLoader.Load("Load/Gameplay/Maps/Map1.xml");
+            map = mapLoader.Load("Load/Gameplay/Maps/GridMap.xml");
             player.LoadContent();
             map.LoadContent();
+
             Camera.Instance.Player = player;
             Camera.Instance.Follow = true;
+            ScreenManager.Instance.CurrentMap = map;
         }
 
         public override void UnloadContent()

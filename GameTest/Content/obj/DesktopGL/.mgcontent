@@ -8,6 +8,7 @@
     <File>C:/Users/andre/source/repos/GameTest/GameTest/Content/Ariel.spritefont</File>
     <File>C:/Users/andre/source/repos/GameTest/GameTest/Content/FadedImage.png</File>
     <File>C:/Users/andre/source/repos/GameTest/GameTest/Content/player.png</File>
+    <File>C:/Users/andre/source/repos/GameTest/GameTest/Content/Square.png</File>
     <File>C:/Users/andre/source/repos/GameTest/GameTest/Content/Stats.png</File>
     <File>C:/Users/andre/source/repos/GameTest/GameTest/Content/Textures.png</File>
     <File>C:/Users/andre/source/repos/GameTest/GameTest/Content/Textures-Walls.png</File>
@@ -15,6 +16,7 @@
   <DestFiles>
     <File>Ground.png</File>
     <File>Arial.spritefont</File>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

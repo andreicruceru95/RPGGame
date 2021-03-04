@@ -11,9 +11,8 @@ namespace GameTest
     public class Map
     {
         [XmlElement("Layer")]
-        public List<Layer> Layer;
+        public List<Layer> Layer { get; }
         public Vector2 TileDimensions;
-
         /// <summary>
         /// Initialzize
         /// </summary>
@@ -59,7 +58,7 @@ namespace GameTest
         public void Draw(SpriteBatch spriteBatch,string drawType)
         {
             foreach (Layer l in Layer)
-                l.Draw(spriteBatch, drawType);
+                l.Draw(spriteBatch, drawType);            
         }
     }
 }

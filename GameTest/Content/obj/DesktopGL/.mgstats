@@ -3,6 +3,7 @@ Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Siz
 "C:/Users/andre/source/repos/GameTest/GameTest/Content/Ariel.spritefont","C:/Users/andre/source/repos/GameTest/GameTest/Content/bin/DesktopGL/Arial.xnb","FontDescriptionProcessor","SpriteFontContent",2008,70690,0.091966
 "C:/Users/andre/source/repos/GameTest/GameTest/Content/FadedImage.png","C:/Users/andre/source/repos/GameTest/GameTest/Content/bin/DesktopGL/FadedImage.xnb","TextureProcessor","Texture2DContent",119,89,0.0031531
 "C:/Users/andre/source/repos/GameTest/GameTest/Content/player.png","C:/Users/andre/source/repos/GameTest/GameTest/Content/bin/DesktopGL/player.xnb","TextureProcessor","Texture2DContent",6900,49237,0.0044684
+"C:/Users/andre/source/repos/GameTest/GameTest/Content/Square.png","C:/Users/andre/source/repos/GameTest/GameTest/Content/bin/DesktopGL/Square.xnb","TextureProcessor","Texture2DContent",31528,10240085,0.4926503
 "C:/Users/andre/source/repos/GameTest/GameTest/Content/Stats.png","C:/Users/andre/source/repos/GameTest/GameTest/Content/bin/DesktopGL/Stats.xnb","TextureProcessor","Texture2DContent",5805,128085,0.1780878
 "C:/Users/andre/source/repos/GameTest/GameTest/Content/Textures.png","C:/Users/andre/source/repos/GameTest/GameTest/Content/bin/DesktopGL/Textures.xnb","TextureProcessor","Texture2DContent",163839,6220885,0.1862367
 "C:/Users/andre/source/repos/GameTest/GameTest/Content/Textures-Walls.png","C:/Users/andre/source/repos/GameTest/GameTest/Content/bin/DesktopGL/Textures-Walls.xnb","TextureProcessor","Texture2DContent",171612,6220885,0.15122

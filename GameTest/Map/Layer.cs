@@ -31,8 +31,19 @@ namespace GameTest
         public TileMap Tile;
         public Image Image;
         public string SolidTiles, OverlayTiles;
-        List<Tile> underlayTiles, overlayTiles;
+        List<Tile> underlayTiles, overlayTiles, notWalkableTiles;
+        
+        public List<Tile> NotWalkableTiles
+        {
+            get { return notWalkableTiles; }
+        }
+        public List<Tile> UnderlayTiles
+        {
+            get { return underlayTiles; }
+        }       
         string state;
+        SpriteFont font;
+
         /// <summary>
         /// Initialize layer.
         /// </summary>
@@ -41,7 +52,9 @@ namespace GameTest
             Image = new Image();
             underlayTiles = new List<Tile>();
             overlayTiles = new List<Tile>();
+            notWalkableTiles = new List<Tile>();
             SolidTiles = OverlayTiles = String.Empty;
+            font = ScreenManager.Instance.Font;
         }
         /// <summary>
         /// Load tiles
@@ -72,7 +85,10 @@ namespace GameTest
                             int value1 = int.Parse(str.Substring(0, str.IndexOf(':')));
                             int value2 = int.Parse(str.Substring(str.IndexOf(':') + 1));
                             if (SolidTiles.Contains("[" + value1.ToString() + ":" + value2.ToString() + "]"))
+                            {
                                 state = "Solid";
+                                notWalkableTiles.Add(tile);
+                            }
 
                             tile.LoadContent(position, new Rectangle(
                                 value1 * (int)tileDimensions.X, value2 * (int)tileDimensions.Y,
@@ -82,12 +98,11 @@ namespace GameTest
                                 overlayTiles.Add(tile);
                             else
                                 underlayTiles.Add(tile);
-
                         }
                     }
 
                 }
-            }
+            }            
         }
         /// <summary>
         /// unload content
@@ -120,7 +135,8 @@ namespace GameTest
         {
             List<Tile> tiles;
             if (drawType == "Underlay")
-                tiles = underlayTiles;
+                tiles = underlayTiles;              
+            
             else
                 tiles = overlayTiles;
             foreach(Tile tile in tiles)
@@ -130,7 +146,7 @@ namespace GameTest
                 //set source to tilesheet
                 Image.SourceRect = tile.SourceRect;
                 Image.Draw(spriteBatch);
-            }
+            }            
         }
     }
 }
