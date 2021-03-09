@@ -10,6 +10,9 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Manager\MouseHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Remove="C:\Users\andre\.nuget\packages\monogame.extended\3.8.0\contentFiles\any\netstandard2.0\CppNet.dll" />
     <Content Remove="C:\Users\andre\.nuget\packages\monogame.extended\3.8.0\contentFiles\any\netstandard2.0\libmojoshader_64.dll" />
     <Content Remove="C:\Users\andre\.nuget\packages\monogame.extended\3.8.0\contentFiles\any\netstandard2.0\mgfxc.deps.json" />

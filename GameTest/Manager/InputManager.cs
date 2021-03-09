@@ -9,6 +9,7 @@ namespace GameTest
     public class InputManager
     {
         KeyboardState currentKeyState, prevKeyState;
+        MouseState mouse;
 
         private static InputManager instance;
 
@@ -26,8 +27,10 @@ namespace GameTest
         public void Update()
         {
             prevKeyState = currentKeyState;
+            mouse = new MouseState();
             if (!ScreenManager.Instance.IsTransitioning)
                 currentKeyState = Keyboard.GetState();
+            mouse = Mouse.GetState();
         }
 
         public bool KeyPressed(params Keys[] keys)
@@ -57,6 +60,14 @@ namespace GameTest
                 if (currentKeyState.IsKeyDown(key))
                     return true;
             }
+            return false;
+        }
+
+        public bool IsLeftClick()
+        {
+            if (mouse.LeftButton == ButtonState.Pressed)
+                return true;
+
             return false;
         }
     }

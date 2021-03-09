@@ -72,14 +72,14 @@ namespace GameTest
         /// <param name="player"></param>
         public void Update(GameTime gameTime, Player player)
         {
-            if (state == "Solid" && player.keyboardMode)
+            if (state == "Solid" && player.KeyboardMode)
             {
                 Rectangle tileRect = new Rectangle((int)Position.X, (int)Position.Y, sourceRect.Width, sourceRect.Height);
                 Rectangle playerRect = new Rectangle((int)player.Image.Position.X, (int)player.Image.Position.Y,
                     player.Image.SourceRect.Width, player.Image.SourceRect.Height);
                 //Check for colision
                 if(playerRect.Intersects(tileRect))
-                {
+                {                    
                     //if colision is detected, set the player to a obj rectangle x - player rectangle width/height
                     if (player.Velocity.X < 0)
                         player.Image.Position.X = tileRect.Right;

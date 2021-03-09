@@ -95,10 +95,11 @@ namespace GameTest
                 int X = (int)(Camera.Instance.Player.Image.Position.X);
                 int Y = (int)(Camera.Instance.Player.Image.Position.Y);
                 fixedSprite.Begin();
-                fixedSprite.DrawString(ScreenManager.Instance.Font, $"Energy: {Camera.Instance.Player.Energy}",
+                fixedSprite.DrawString(ScreenManager.Instance.Font, $"Energy: {(int)Camera.Instance.Player.Energy}",
                     new Vector2(10,10), Color.White);
                 fixedSprite.DrawString(ScreenManager.Instance.Font, $"{X} : {Y}", new Vector2(10, 25), Color.White);
-                
+                fixedSprite.DrawString(ScreenManager.Instance.Font, $"HP: {Camera.Instance.Player.Health}", new Vector2(25, 40), Color.White);
+
                 fixedSprite.End();
             }
 
