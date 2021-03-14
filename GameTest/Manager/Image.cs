@@ -36,7 +36,7 @@ namespace GameTest
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="effect"></param>
-        void SetEffect<T>(T effect)
+        void SetEffect<T>(ref T effect)
         {
             if (effect == null)
                 effect = (T)Activator.CreateInstance(typeof(T));
@@ -156,8 +156,8 @@ namespace GameTest
             ScreenManager.Instance.GraphicsDevice.SetRenderTarget(null);
 
 
-            SetEffect<FadeEffect>(FadeEffect);
-            SetEffect<SpriteSheetEffect>(SpriteSheetEffect);
+            SetEffect<FadeEffect>(ref FadeEffect);
+            SetEffect<SpriteSheetEffect>(ref SpriteSheetEffect);
 
             if (Effects != String.Empty)
             {
