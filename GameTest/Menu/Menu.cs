@@ -8,6 +8,9 @@ using System.Xml.Serialization;
 
 namespace GameTest
 {
+    /// <summary>
+    /// Game menu
+    /// </summary>
     public class Menu
     {
         public event EventHandler OnMenuChange;
@@ -35,7 +38,10 @@ namespace GameTest
                 OnMenuChange(this, null);               
             }
         }
-
+        /// <summary>
+        /// Transition effect for each menu item.
+        /// </summary>
+        /// <param name="alpha"></param>
         public void Transition(float alpha)
         {
             foreach(MenuItem item in Items)
@@ -48,7 +54,9 @@ namespace GameTest
                     item.Image.FadeEffect.Increase = false;
             }
         }
-
+        /// <summary>
+        /// Align menu items to the centre of the screen
+        /// </summary>
         void AlingMenuItems()
         {
             Vector2 dimensions = Vector2.Zero;
@@ -72,7 +80,7 @@ namespace GameTest
             }
         }
         /// <summary>
-        /// Addign universal evects to every menu item.
+        /// Assign universal efects to every menu item.
         /// </summary>
         public Menu()
         {
@@ -82,6 +90,9 @@ namespace GameTest
             Axis = "Y";
             Items = new List<MenuItem>();
         }
+        /// <summary>
+        /// load content
+        /// </summary>
         public void LoadContent()
         {
             string[] split = Effects.Split(':');
@@ -93,6 +104,9 @@ namespace GameTest
             }
             AlingMenuItems();
         }
+        /// <summary>
+        /// unload content
+        /// </summary>
         public void UnloadContent()
         {
             foreach (MenuItem item in Items)
@@ -132,6 +146,10 @@ namespace GameTest
                 Items[i].Image.Update(gameTime);
             }
         }
+        /// <summary>
+        /// Draw content on screen
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         public void Draw(SpriteBatch spriteBatch)
         {
             foreach (MenuItem item in Items)

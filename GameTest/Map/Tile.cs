@@ -7,6 +7,9 @@ using System.Text;
 
 namespace GameTest
 {
+    /// <summary>
+    /// Tiles are at the lowest of the map.
+    /// </summary>
     public class Tile
     {
         Vector2 position;
@@ -66,7 +69,7 @@ namespace GameTest
         public void UnloadCotent()
         { }
         /// <summary>
-        /// Update game based on tile state
+        /// Update game based on tile state.
         /// </summary>
         /// <param name="gameTime"></param>
         /// <param name="player"></param>

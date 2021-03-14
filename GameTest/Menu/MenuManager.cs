@@ -7,16 +7,21 @@ using System.Text;
 
 namespace GameTest
 {
+    /// <summary>
+    /// Manage menu content.
+    /// </summary>
     public class MenuManager
     {
         Menu menu;
         bool IsTransitioning;
-
+        /// <summary>
+        /// Transition effect for each menu item.
+        /// </summary>
+        /// <param name="gameTime"></param>
         void Transition(GameTime gameTime)
         {
             if(IsTransitioning)
-            {
-                
+            {                
                 for (int i = 0; i < menu.Items.Count; i++)
                 {
                     menu.Items[i].Image.Update(gameTime);
@@ -36,12 +41,19 @@ namespace GameTest
                 }
             }
         }
+        /// <summary>
+        /// initialize.
+        /// </summary>
         public MenuManager()
         {
             menu = new Menu();
             menu.OnMenuChange += Menu_OnMenuChange;
         }
-
+        /// <summary>
+        /// Chnge screen based on the menu choice.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_OnMenuChange(object sender, EventArgs e)
         {
             XmlManager<Menu> xmlManager = new XmlManager<Menu>();
@@ -57,16 +69,26 @@ namespace GameTest
                 item.Image.ActivateEffect("FadeEffect");
             }
         }
-
+        /// <summary>
+        /// Load content.
+        /// </summary>
+        /// <param name="menuPath"></param>
         public void LoadContent(string menuPath)
         {
             if (menuPath != String.Empty)
                 menu.ID = menuPath;
         }
+        /// <summary>
+        /// unlaod content.
+        /// </summary>
         public void UnloadContent()
         {
             menu.UnloadContent();
         }
+        /// <summary>
+        /// update Menu and screen and change screen if that option is selected in the menu.
+        /// </summary>
+        /// <param name="gameTime"></param>
         public void Update(GameTime gameTime)
         {
             if(!IsTransitioning)
@@ -92,6 +114,10 @@ namespace GameTest
             }
             Transition(gameTime);
         }
+        /// <summary>
+        /// draw content.
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         public void Draw(SpriteBatch spriteBatch)
         {
             menu.Draw(spriteBatch);

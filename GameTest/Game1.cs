@@ -13,7 +13,6 @@ namespace GameTest
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         SpriteBatch fixedSprite;
-        MouseState state;
 
         public Game1()
         {
@@ -72,7 +71,6 @@ namespace GameTest
                 this.Exit();
 
             ScreenManager.Instance.Update(gameTime);
-            state = Mouse.GetState();
 
             base.Update(gameTime);
         }
@@ -87,9 +85,9 @@ namespace GameTest
             spriteBatch.Begin(transformMatrix: Camera.Instance.Transform);
 
             ScreenManager.Instance.Draw(spriteBatch);
-            if (state.LeftButton == ButtonState.Pressed)
-                spriteBatch.DrawString(ScreenManager.Instance.Font, $"{state.X} : {state.Y}", new Vector2(50,50), Color.White);
+            
             spriteBatch.End();
+
             if(Camera.Instance.Player != null)
             {
                 int X = (int)(Camera.Instance.Player.Image.Position.X);

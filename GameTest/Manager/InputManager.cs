@@ -6,6 +6,9 @@ using System.Text;
 
 namespace GameTest
 {
+    /// <summary>
+    /// This class will manage any input from the user.
+    /// </summary>
     public class InputManager
     {
         KeyboardState currentKeyState, prevKeyState;
@@ -13,6 +16,9 @@ namespace GameTest
 
         private static InputManager instance;
 
+        /// <summary>
+        /// Force to singleton.
+        /// </summary>
         public static InputManager Instance
         {
             get
@@ -23,7 +29,9 @@ namespace GameTest
                 return instance;
             }
         }
-
+        /// <summary>
+        /// Update input manager.
+        /// </summary>
         public void Update()
         {
             prevKeyState = currentKeyState;
@@ -32,7 +40,11 @@ namespace GameTest
                 currentKeyState = Keyboard.GetState();
             mouse = Mouse.GetState();
         }
-
+        /// <summary>
+        /// Check if any keys are pressed, that weren't pressed previously.
+        /// </summary>
+        /// <param name="keys"></param>
+        /// <returns></returns>
         public bool KeyPressed(params Keys[] keys)
         {
             foreach (Keys key in keys)
@@ -42,7 +54,11 @@ namespace GameTest
             }
             return false;
         }
-
+        /// <summary>
+        /// Check if a key is released.
+        /// </summary>
+        /// <param name="keys"></param>
+        /// <returns></returns>
         public bool KeyReleased(params Keys[] keys)
         {
             foreach (Keys key in keys)
@@ -52,7 +68,11 @@ namespace GameTest
             }
             return false;
         }
-
+        /// <summary>
+        /// Check if a key is down.
+        /// </summary>
+        /// <param name="keys"></param>
+        /// <returns></returns>
         public bool KeyDown(params Keys[] keys)
         {
             foreach (Keys key in keys)
@@ -62,7 +82,10 @@ namespace GameTest
             }
             return false;
         }
-
+        /// <summary>
+        /// Chech for mouse left click activity.
+        /// </summary>
+        /// <returns></returns>
         public bool IsLeftClick()
         {
             if (mouse.LeftButton == ButtonState.Pressed)

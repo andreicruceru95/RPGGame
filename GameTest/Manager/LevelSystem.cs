@@ -4,6 +4,9 @@ using System.Text;
 
 namespace GameTest.Manager
 {
+    /// <summary>
+    /// Level system not currently implemented.
+    /// </summary>
     public class LevelSystem
     {
         public event EventHandler OnExperienceChanged;

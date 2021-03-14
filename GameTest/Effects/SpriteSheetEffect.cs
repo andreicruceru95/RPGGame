@@ -6,13 +6,19 @@ using System.Text;
 
 namespace GameTest
 {
+    /// <summary>
+    /// Effect for atlas-type images.
+    /// This class splits an image in a 2d array and reffer to each of the frames.
+    /// </summary>
     public class SpriteSheetEffect : ImageEffect
     {
         public int FrameCounter;
         public int SwitchFrame;
         public Vector2 CurrentFrame;
         public Vector2 AmountOfFrames;
-
+        /// <summary>
+        /// return frame width.
+        /// </summary>
         public int FrameWidth
         {
             get 
@@ -22,6 +28,9 @@ namespace GameTest
                 return 0;
             }
         }
+        /// <summary>
+        /// return frame height.
+        /// </summary>
         public int FrameHeight
         {
             get
@@ -31,7 +40,9 @@ namespace GameTest
                 return 0;
             }
         }
-
+        /// <summary>
+        /// initialize.
+        /// </summary>
         public SpriteSheetEffect()
         {
             AmountOfFrames = new Vector2(3, 4);
@@ -39,11 +50,17 @@ namespace GameTest
             SwitchFrame = 100;
             FrameCounter = 0;
         }
+        /// <summary>
+        /// load image content.
+        /// </summary>
+        /// <param name="Image"></param>
         public override void LoadContent(Image Image)
         {
             base.LoadContent(Image);
         }
-
+        /// <summary>
+        /// unload content.
+        /// </summary>
         public override void UnloadContent()
         {
             base.UnloadContent();

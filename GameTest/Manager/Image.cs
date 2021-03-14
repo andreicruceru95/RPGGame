@@ -9,55 +9,62 @@ using System.Xml.Serialization;
 
 namespace GameTest
 {
+    /// <summary>
+    /// 2D Texture used by different game objects.
+    /// </summary>
     public class Image
     {
-        public float Alpha;
-        public string Text, FontName, Path;
-        public Vector2 Position, Scale;
-        
-        public Rectangle SourceRect;
-        //private Vector2 centre;
-        public bool IsActive;
         [XmlIgnore]
         public Texture2D Texture;
+        public float Alpha;
+        public string Text, FontName, Path;
+        public Vector2 Position, Scale;        
+        public Rectangle SourceRect;        
+        public bool IsActive;        
+        public string Effects;
+        public FadeEffect FadeEffect;
+        public SpriteSheetEffect SpriteSheetEffect;
+
         Vector2 origin;
         ContentManager content;
         RenderTarget2D renderTarget;
         SpriteFont font;
-        Dictionary<string, ImageEffect> effectList;
-        public string Effects;
+        Dictionary<string, ImageEffect> effectList;      
 
-        public FadeEffect FadeEffect;
-        public SpriteSheetEffect SpriteSheetEffect;
-        //public Vector2 Centre
-        //{
-        //    get { return new Vector2(SourceRect.Center.X, SourceRect.Center.Y); }
-        //}
-
-        void SetEffect<T>(ref T effect)
+        /// <summary>
+        /// Set an image effect.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="effect"></param>
+        void SetEffect<T>(T effect)
         {
             if (effect == null)
                 effect = (T)Activator.CreateInstance(typeof(T));
             else
             {
-                (effect as ImageEffect).IsActive = true;
-                //var obj = this;
+                (effect as ImageEffect).IsActive = true;                
                 (effect as ImageEffect).LoadContent(this);
             }
 
             effectList.Add(effect.GetType().ToString().Replace("GameTest.", ""), (effect as ImageEffect));
         }
-
+        /// <summary>
+        /// Activate an effect
+        /// </summary>
+        /// <param name="effect">given effect</param>
         public void ActivateEffect(string effect)
         {
             if (effectList.ContainsKey(effect))
             {
                 effectList[effect].IsActive = true;
-                //var obj = this;
                 effectList[effect].LoadContent(this);
             }
         }
 
+        /// <summary>
+        /// Deactivate an effect
+        /// </summary>
+        /// <param name="effect">given effect</param>
         public void DeactivateEffect(string effect)
         {
             if (effectList.ContainsKey(effect))
@@ -93,7 +100,9 @@ namespace GameTest
             foreach (string s in split)
                 ActivateEffect(s);
         }
-
+        /// <summary>
+        /// Initialize.
+        /// </summary>
         public Image()
         {
             Path = Text = Effects = String.Empty;
@@ -104,19 +113,21 @@ namespace GameTest
             SourceRect = Rectangle.Empty;
             effectList = new Dictionary<string, ImageEffect>();
         }
-
+        /// <summary>
+        /// Load content.
+        /// </summary>
         public void LoadContent()
         {
             content = new ContentManager(
                 ScreenManager.Instance.Content.ServiceProvider, "Content");
-
+            //load image from file by reffering to its path
             if (Path != String.Empty)
                 Texture = content.Load<Texture2D>(Path);
 
             font = content.Load<SpriteFont>(FontName);
 
             Vector2 dimensions = Vector2.Zero;
-
+            //Set the image dimension based on image size or text size.
             if (Texture != null)
                 dimensions.X += Texture.Width;
             dimensions.X += font.MeasureString(Text).X;
@@ -136,6 +147,7 @@ namespace GameTest
             ScreenManager.Instance.SpriteBatch.Begin();
             if (Texture != null)
                 ScreenManager.Instance.SpriteBatch.Draw(Texture, Vector2.Zero, Color.White);
+
             ScreenManager.Instance.SpriteBatch.DrawString(font, Text, Vector2.Zero, Color.White);
             ScreenManager.Instance.SpriteBatch.End();
 
@@ -144,8 +156,8 @@ namespace GameTest
             ScreenManager.Instance.GraphicsDevice.SetRenderTarget(null);
 
 
-            SetEffect<FadeEffect>(ref FadeEffect);
-            SetEffect<SpriteSheetEffect>(ref SpriteSheetEffect);
+            SetEffect<FadeEffect>(FadeEffect);
+            SetEffect<SpriteSheetEffect>(SpriteSheetEffect);
 
             if (Effects != String.Empty)
             {
@@ -155,6 +167,9 @@ namespace GameTest
             }
         }
 
+        /// <summary>
+        /// unload content and deactivate effects.
+        /// </summary>
         public void UnloadContent()
         {
             content.Unload();
@@ -162,6 +177,10 @@ namespace GameTest
                 DeactivateEffect(effect.Key);
         }
 
+        /// <summary>
+        /// update effects
+        /// </summary>
+        /// <param name="gameTime"></param>
         public void Update(GameTime gameTime)
         {
             foreach (var effect in effectList)
@@ -170,7 +189,10 @@ namespace GameTest
                     effect.Value.Update(gameTime);
             }
         }
-
+        /// <summary>
+        /// Draw image on screen.
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         public void Draw(SpriteBatch spriteBatch)
         {
             origin = new Vector2(SourceRect.Width / 2,

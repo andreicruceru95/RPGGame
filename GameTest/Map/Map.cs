@@ -8,6 +8,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameTest
 {
+    /// <summary>
+    /// A game map created from multiple stacked layers.
+    /// </summary>
     public class Map
     {
         [XmlElement("Layer")]
@@ -33,7 +36,7 @@ namespace GameTest
                 l.LoadContent(TileDimensions);
         }
         /// <summary>
-        /// unload tiles
+        /// unload each layer
         /// </summary>
         public void UnloadContent()
         {
@@ -41,7 +44,7 @@ namespace GameTest
                 l.UnloadContent();
         }
         /// <summary>
-        /// update map texture
+        /// update map texture by calling each layer.
         /// </summary>
         /// <param name="gameTime"></param>
         /// <param name="player"></param>

@@ -57,7 +57,7 @@ namespace GameTest
             font = ScreenManager.Instance.Font;
         }
         /// <summary>
-        /// Load tiles
+        /// Load each tile in the layer.
         /// </summary>
         /// <param name="tileDimensions"></param>
         public void LoadContent(Vector2 tileDimensions)

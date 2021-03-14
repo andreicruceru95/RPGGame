@@ -5,28 +5,45 @@ using System.Text;
 
 namespace GameTest
 {
+    /// <summary>
+    /// Fade effect that inherits from image effect.
+    /// </summary>
     public class FadeEffect : ImageEffect
     {
         public float FadeSpeed;
         public bool Increase;
         public bool IsMonster;
-
+        /// <summary>
+        /// Initialization.
+        /// </summary>
         public FadeEffect()
         {
             FadeSpeed = 1;
             Increase = false;
         }
 
+        /// <summary>
+        /// Load image.
+        /// </summary>
+        /// <param name="Image">Given image</param>
         public override void LoadContent(Image Image)
         {
             base.LoadContent(Image);
         }
 
+        /// <summary>
+        /// unload any content.
+        /// </summary>
         public override void UnloadContent()
         {
             base.UnloadContent();
         }
 
+        /// <summary>
+        /// Update the effect.
+        /// The image opacity fluctuates between 1 and 0.
+        /// </summary>
+        /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);

@@ -7,11 +7,17 @@ using Microsoft.Xna.Framework.Content;
 
 namespace GameTest
 {
+    /// <summary>
+    /// This Screen contains the game objects.
+    /// </summary>
     public class GameplayScreen : GameScreen
     {
         Player player;
         Map map;
      
+        /// <summary>
+        /// load content from file.
+        /// </summary>
         public override void LoadContent()
         {
             base.LoadContent();
@@ -27,14 +33,19 @@ namespace GameTest
             Camera.Instance.Follow = true;
             ScreenManager.Instance.CurrentMap = map;
         }
-
+        /// <summary>
+        /// unload content.
+        /// </summary>
         public override void UnloadContent()
         {
             base.UnloadContent();
             player.UnloadContent();
             map.UnloadContent();
         }
-
+        /// <summary>
+        /// update objects.
+        /// </summary>
+        /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
@@ -42,6 +53,10 @@ namespace GameTest
             map.Update(gameTime, player);            
         }
 
+        /// <summary>
+        /// Draw objects on screen.
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);

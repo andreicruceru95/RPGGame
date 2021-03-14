@@ -10,6 +10,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameTest
 {
+    /// <summary>
+    /// Screen manager is responsible with managing screen content.
+    /// </summary>
     public class ScreenManager
     {
         private static ScreenManager instance;
@@ -40,7 +43,9 @@ namespace GameTest
         [XmlIgnore]
         public Map CurrentMap;
        
-
+        /// <summary>
+        /// force to singleton.
+        /// </summary>
         public static ScreenManager Instance
         {
             get
@@ -54,7 +59,10 @@ namespace GameTest
                 return instance;
             }
         }
-
+        /// <summary>
+        /// Change the screen.
+        /// </summary>
+        /// <param name="screenName"></param>
         public void ChangeScreens(string screenName)
         {
             newScreen = (GameScreen)Activator.CreateInstance(Type.GetType("GameTest." + screenName));
@@ -63,7 +71,10 @@ namespace GameTest
             Image.Alpha = 0.0f;
             IsTransitioning = true;
         }
-
+        /// <summary>
+        /// Manage screen transition.
+        /// </summary>
+        /// <param name="gameTime"></param>
         void Transition(GameTime gameTime)
         {
             if (IsTransitioning)
@@ -87,7 +98,7 @@ namespace GameTest
         }       
 
         /// <summary>
-        /// This method will manage the current view screen.
+        /// Initialize
         /// </summary>
         public ScreenManager()
         {
@@ -98,7 +109,10 @@ namespace GameTest
             xmlGameScreenManager.Type = currentScreen.Type;
             currentScreen = xmlGameScreenManager.Load("Load/SplashScreen.xml");            
         }
-
+        /// <summary>
+        /// Load content
+        /// </summary>
+        /// <param name="Content"></param>
         public void LoadContent(ContentManager Content)
         {
             this.Content = new ContentManager(Content.ServiceProvider, "Content");
@@ -106,20 +120,28 @@ namespace GameTest
             Image.LoadContent();
             Font = Content.Load<SpriteFont>("Arial");
         }
-
+        /// <summary>
+        /// Unload content
+        /// </summary>
         public void UnloadContent()
         {
             currentScreen.UnloadContent();
             Image.UnloadContent();
         }
-
+        /// <summary>
+        /// Update screen
+        /// </summary>
+        /// <param name="gameTime"></param>
         public void Update(GameTime gameTime)
         {
-            Camera.Instance.UpdateCamera();
+            Camera.Instance.Update();
             currentScreen.Update(gameTime);
             Transition(gameTime);
         }
-
+        /// <summary>
+        /// Draw on screen.
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         public void Draw(SpriteBatch spriteBatch)
         {
             currentScreen.Draw(spriteBatch);

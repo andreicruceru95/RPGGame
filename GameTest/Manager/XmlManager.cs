@@ -6,6 +6,10 @@ using System.IO;
 
 namespace GameTest
 {
+    /// <summary>
+    /// This class will manage xml files.
+    /// </summary>
+    /// <typeparam name="T">type of object to mnanage.</typeparam>
     public class XmlManager<T>
     {
         public Type Type;
@@ -13,6 +17,11 @@ namespace GameTest
         {
             Type = typeof(T);
         }
+        /// <summary>
+        /// Load from path.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public T Load(string path)
         {
             T instance;
@@ -23,7 +32,11 @@ namespace GameTest
             }
             return instance;
         }
-
+        /// <summary>
+        /// Save to file.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="obj"></param>
         public void Save(string path, object obj)
         {
             using (TextWriter writer = new StreamWriter(path))

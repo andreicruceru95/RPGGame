@@ -7,6 +7,9 @@ using System.Text;
 
 namespace GameTest
 {
+    /// <summary>
+    /// Camera view of the game using a matrix.
+    /// </summary>
     public class Camera
     {
         private static Camera instance;
@@ -20,6 +23,9 @@ namespace GameTest
         public bool Follow { get; set; }
 
         private float currentMouseWheelValue, previousMouseWheelValue;
+        /// <summary>
+        /// Force this class to a singleton. There can only be one camera view (player's perspective)
+        /// </summary>
         public static Camera Instance
         {
             get
@@ -31,6 +37,9 @@ namespace GameTest
                 return instance;
             }
         }
+        /// <summary>
+        /// Initialize.
+        /// </summary>
         public Camera()
         {
             Bounds = Viewport.Bounds;
@@ -56,6 +65,9 @@ namespace GameTest
         //        MathHelper.Max(tl.Y, MathHelper.Max(tr.Y, MathHelper.Max(bl.Y, br.Y))));
         //    VisibleArea = new Rectangle((int)min.X, (int)min.Y, (int)(max.X - min.X), (int)(max.Y - min.Y));
         //}
+        /// <summary>
+        /// Update camera matrix.
+        /// </summary>
         private void UpdateMatrix()
         {
             Transform = Matrix.CreateTranslation(new Vector3(-Position.X, -Position.Y, 0)) *
@@ -63,7 +75,10 @@ namespace GameTest
                     Matrix.CreateTranslation(new Vector3(Bounds.Width * 0.5f, Bounds.Height * 0.5f, 0));
             //UpdateVisibleArea();
         }
-
+        /// <summary>
+        /// Move the camera.
+        /// </summary>
+        /// <param name="movePosition">distance to move</param>
         public void MoveCamera(Vector2 movePosition)
         {
             Vector2 newPosition = Position + movePosition;
@@ -78,7 +93,9 @@ namespace GameTest
 
             Position = newPosition;
         }
-
+        /// <summary>
+        /// Adjust the camera zoom.
+        /// </summary>
         public void AdjustZoom()
         {
             previousMouseWheelValue = currentMouseWheelValue;
@@ -93,6 +110,9 @@ namespace GameTest
             if (Zoom > 1.5f) Zoom = 1.5f;           
         }    
         
+        /// <summary>
+        /// set the matrix to follow the player.
+        /// </summary>
         private void FollowPlayer()
         {
             var position = Matrix.CreateTranslation(
@@ -103,8 +123,10 @@ namespace GameTest
 
             Transform = position * offset; //*Matrix.CreateScale(Zoom) 
         }
-
-        public void UpdateCamera()
+        /// <summary>
+        /// Update camera.
+        /// </summary>
+        public void Update()
         {
             if (Follow)
                 FollowPlayer();
@@ -115,7 +137,9 @@ namespace GameTest
                 SetCameraMovement();                
             }
         }
-
+        /// <summary>
+        /// Set the camera movement based on user input.
+        /// </summary>
         private void SetCameraMovement()
         {
             Vector2 cameraMovement = Vector2.Zero;
@@ -136,6 +160,10 @@ namespace GameTest
             MoveCamera(cameraMovement);
         }
 
+        /// <summary>
+        /// Set camera speed based on the zoom.
+        /// </summary>
+        /// <returns></returns>
         private int SetCameraSpeed()
         {
             int moveSpeed;

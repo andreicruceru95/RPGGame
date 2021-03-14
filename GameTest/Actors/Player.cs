@@ -10,6 +10,9 @@ using System.Xml.Serialization;
 
 namespace GameTest
 {
+    /// <summary>
+    /// The player class is a virtual representation of a game user.
+    /// </summary>
     public class Player
     {
         public Image Image;
@@ -26,28 +29,43 @@ namespace GameTest
         }
         MovementHandler moveManager;
 
+        /// <summary>
+        /// Initialize player value. This can also be done inside the xml file.
+        /// </summary>
         public Player()
         {            
             Velocity = Vector2.Zero;
             RunSpeed = 5.0f;
             moveManager = new MovementHandler(this);
         }
+        /// <summary>
+        /// Change the camera based on player input.
+        /// </summary>
         private void SetCamera()
         {
             if (InputManager.Instance.KeyPressed(Keys.C)) Camera.Instance.Follow = true;
 
             if (InputManager.Instance.KeyPressed(Keys.V)) Camera.Instance.Follow = false;
         }
+        /// <summary>
+        /// Load any content useful for the player class.
+        /// </summary>
         public void LoadContent()
         {
             Image.LoadContent();
         }
-
+        /// <summary>
+        /// Unload any content that the player does not need. This will free up memory.
+        /// </summary>
         public void UnloadContent()
         {
             Image.UnloadContent();
         }
 
+        /// <summary>
+        /// Update the player's atribute and other player-related things.
+        /// </summary>
+        /// <param name="gameTime"></param>
         public void Update(GameTime gameTime)
         {
             Image.IsActive = true;
@@ -60,6 +78,10 @@ namespace GameTest
             Image.Position += Velocity;
         }
 
+        /// <summary>
+        /// Draw on the screen using the graphics object.
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         public void Draw(SpriteBatch spriteBatch)
         {            
             Image.Draw(spriteBatch);
