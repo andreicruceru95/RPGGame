@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Monster>
+	<Image>
+		<Path>C:\Users\andre\source\repos\GameTest\GameTest\Content\bin\DesktopGL\player</Path>
+		<Effects>SpriteSheetEffect</Effects>
+		<Effects>FadeEffect</Effects>
+		<Scale>
+			<X>1.3</X>
+			<Y>1.3</Y>
+		</Scale>
+		<Position>
+			<X>550</X>
+			<Y>550</Y>
+		</Position>
+	</Image>
+	<MoveSpeed>100</MoveSpeed>
+</Monster>

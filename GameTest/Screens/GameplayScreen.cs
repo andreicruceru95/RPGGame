@@ -13,6 +13,7 @@ namespace GameTest
     public class GameplayScreen : GameScreen
     {
         Player player;
+        Monster monster;
         Map map;
      
         /// <summary>
@@ -23,11 +24,14 @@ namespace GameTest
             base.LoadContent();
             XmlManager<Player> playerLoader = new XmlManager<Player>();
             XmlManager<Map> mapLoader = new XmlManager<Map>();
+            XmlManager<Monster> monsterLoader = new XmlManager<Monster>();
             player = playerLoader.Load("Load/Gameplay/Player.xml");
             map = mapLoader.Load("Load/Gameplay/Maps/Map1.xml");
+            monster = monsterLoader.Load("Load/Gameplay/Monster1.xml");
             //map = mapLoader.Load("Load/Gameplay/Maps/GridMap.xml");
             player.LoadContent();
             map.LoadContent();
+            monster.LoadContent();
 
             Camera.Instance.Player = player;
             Camera.Instance.Follow = true;
@@ -41,6 +45,7 @@ namespace GameTest
             base.UnloadContent();
             player.UnloadContent();
             map.UnloadContent();
+            monster.UnloadContent();
         }
         /// <summary>
         /// update objects.
@@ -50,7 +55,8 @@ namespace GameTest
         {
             base.Update(gameTime);
             player.Update(gameTime);
-            map.Update(gameTime, player);            
+            map.Update(gameTime, player);
+            monster.Update(gameTime);
         }
 
         /// <summary>
@@ -62,6 +68,7 @@ namespace GameTest
             base.Draw(spriteBatch);
             map.Draw(spriteBatch, "Underlay");
             player.Draw(spriteBatch);
+            monster.Draw(spriteBatch);
             map.Draw(spriteBatch, "Overlay");
         }
     }

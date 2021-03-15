@@ -6,15 +6,15 @@ using System.Text;
 
 namespace GameTest
 {
-    public class Actor
+    public abstract class Actor
     {
-        protected Image Image { get; set; }
-        protected Vector2 Velocity { get; set; }
-        protected float MoveSpeed { get; set; }
-        protected bool IsAlive { get; set; }
+        public Image Image { get; set; }
+        //public Vector2 Velocity { get; set; }
+        public float MoveSpeed { get; set; }
+        public bool IsAlive { get; set; }
 
-        protected Vector2 Origin;
-        protected Vector2 Position;
+        public Vector2 Origin;
+        public Vector2 Position;
 
         public Actor()
         {
@@ -30,7 +30,7 @@ namespace GameTest
             Image.UnloadContent();
         }
         public virtual void Update(GameTime gameTime)
-        {
+        {            
             Image.Update(gameTime);
         }
         public virtual void Draw(SpriteBatch spriteBatch)
