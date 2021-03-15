@@ -6,21 +6,34 @@ using System.Text;
 
 namespace GameTest
 {
-    public abstract class Actor
+    /// <summary>
+    /// Actor represents a moving game objects such as a player or monster.
+    /// </summary>
+    public abstract class Actor : ISolid
     {
         public Image Image { get; set; }
-        //public Vector2 Velocity { get; set; }
         public float MoveSpeed { get; set; }
         public bool IsAlive { get; set; }
+               
+        public Vector2 Position
+        {
+            get
+            {
+                return Image.Position;
+            }
+        }
 
-        public Vector2 Origin;
-        public Vector2 Position;
+        public Rectangle SourceRect
+        {
+            get
+            {
+                return Image.SourceRect;
+            }
+        }
 
         public Actor()
-        {
-            Origin = Vector2.Zero;
-        }
-        //replace with actor
+        {}
+        
         public virtual void LoadContent()
         {
             Image.LoadContent();

@@ -15,20 +15,11 @@ namespace GameTest
     /// </summary>
     public class Player : Actor
     {
-        //public Image Image;
         public Vector2 Velocity;
-        //public float MoveSpeed { get; set; }
         public Vector2 PreviousPosition;
-
         public float RunSpeed { get; set; }
-        public bool KeyboardMode { get; set; }
         public double Energy { get; set; }
         public double Health { get; set; } = 1000;
-
-        public double GetEnergy
-        {
-            get{ return Math.Round(Energy, 1); }
-        }
 
         /// <summary>
         /// Initialize player value. This can also be done inside the xml file.
@@ -40,16 +31,7 @@ namespace GameTest
             PreviousPosition = Vector2.Zero;
             KeyResponse.Instance.Actor = this;
             AutoMove.Instance.Actor = this;
-        }
-        /// <summary>
-        /// Change the camera based on player input.
-        /// </summary>
-        private void SetCamera()
-        {
-            if (InputManager.Instance.KeyPressed(Keys.C)) Camera.Instance.Follow = true;
-
-            if (InputManager.Instance.KeyPressed(Keys.V)) Camera.Instance.Follow = false;
-        }
+        }        
         /// <summary>
         /// Load any content useful for the player class.
         /// </summary>
@@ -73,7 +55,6 @@ namespace GameTest
         {
             Image.IsActive = true;
 
-            SetCamera();
             KeyResponse.Instance.Update(gameTime);
             AnimationManager.Instance.SetFrame(this);
 
@@ -83,7 +64,6 @@ namespace GameTest
             Image.Position += Velocity;
 
             base.Update(gameTime);
-
             SetEnergy(gameTime);            
         }
         private void SetEnergy(GameTime gameTime)

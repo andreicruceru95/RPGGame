@@ -117,13 +117,13 @@ namespace GameTest
         /// </summary>
         /// <param name="gameTime"></param>
         /// <param name="player"></param>
-        public void Update(GameTime gameTime, Player player)
+        public void Update(GameTime gameTime)//, Player player)
         {
-            foreach(Tile tile in underlayTiles)
-                tile.Update(gameTime, player);
+            foreach (Tile tile in underlayTiles)
+                tile.Update(gameTime);//, player);
 
             foreach (Tile tile in overlayTiles)
-                tile.Update(gameTime, player);
+                tile.Update(gameTime);//, player);
 
         }
         /// <summary>

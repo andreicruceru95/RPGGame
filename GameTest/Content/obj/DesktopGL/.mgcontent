@@ -4,7 +4,7 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/andre/source/repos/GameTest/GameTest/Content/../../../../../OneDrive/Desktop/Ground.png</File>
+    <File>C:/Users/andre/source/repos/GameTest/GameTest/Content/Pirates.mp3</File>
     <File>C:/Users/andre/source/repos/GameTest/GameTest/Content/Ariel.spritefont</File>
     <File>C:/Users/andre/source/repos/GameTest/GameTest/Content/FadedImage.png</File>
     <File>C:/Users/andre/source/repos/GameTest/GameTest/Content/player.png</File>
@@ -14,13 +14,7 @@
     <File>C:/Users/andre/source/repos/GameTest/GameTest/Content/Textures-Walls.png</File>
   </SourceFiles>
   <DestFiles>
-    <File>Ground.png</File>
+    <File xsi:nil="true" />
     <File>Arial.spritefont</File>
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
   </DestFiles>
 </SourceFileCollection>

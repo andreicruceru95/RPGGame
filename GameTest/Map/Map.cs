@@ -48,10 +48,10 @@ namespace GameTest
         /// </summary>
         /// <param name="gameTime"></param>
         /// <param name="player"></param>
-        public void Update(GameTime gameTime, Player player)
+        public void Update(GameTime gameTime)//, Player player)
         {
             foreach (Layer l in Layer)
-                l.Update(gameTime, player);
+                l.Update(gameTime);//, player);
         }
         /// <summary>
         /// draw layers(underlay, overlay)

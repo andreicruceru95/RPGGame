@@ -28,7 +28,6 @@ namespace GameTest
             player = playerLoader.Load("Load/Gameplay/Player.xml");
             map = mapLoader.Load("Load/Gameplay/Maps/Map1.xml");
             monster = monsterLoader.Load("Load/Gameplay/Monster1.xml");
-            //map = mapLoader.Load("Load/Gameplay/Maps/GridMap.xml");
             player.LoadContent();
             map.LoadContent();
             monster.LoadContent();
@@ -36,6 +35,7 @@ namespace GameTest
             Camera.Instance.Player = player;
             Camera.Instance.Follow = true;
             ScreenManager.Instance.CurrentMap = map;
+            Collision.Instance.player = player;
         }
         /// <summary>
         /// unload content.
@@ -55,7 +55,7 @@ namespace GameTest
         {
             base.Update(gameTime);
             player.Update(gameTime);
-            map.Update(gameTime, player);
+            map.Update(gameTime);//, player);
             monster.Update(gameTime);
         }
 

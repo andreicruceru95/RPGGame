@@ -1,8 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+﻿
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace GameTest
 {
@@ -12,12 +15,17 @@ namespace GameTest
     public class TitleScreen : GameScreen
     {
         MenuManager menuManager;
+        //[XmlIgnore]
+        //Song song;
+        //Uri path = new Uri("C:/Users/andre/source/repos/GameTest/GameTest/bin/Debug/netcoreapp3.1/Content/Music/");
+        
         /// <summary>
         /// initialize.
         /// </summary>
         public TitleScreen()
         {
             menuManager = new MenuManager();
+            
         }
         /// <summary>
         /// Load Content from file.
@@ -26,6 +34,11 @@ namespace GameTest
         {
             base.LoadContent();
             menuManager.LoadContent("Load/TitleMenu.xml");
+            //song = Song.FromUri("Pirates.MP3", path);
+            //song = content.Load<Song>("Music/Pirates");
+            //MediaPlayer.Volume = 10;
+            //MediaPlayer.Play(song);
+           
         }
         /// <summary>
         /// Unload content.

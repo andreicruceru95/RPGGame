@@ -12,14 +12,14 @@ namespace GameTest
     /// <summary>
     /// 2D Texture used by different game objects.
     /// </summary>
-    public class Image
+    public class Image 
     {
         [XmlIgnore]
         public Texture2D Texture;
         public float Alpha;
         public string Text, FontName, Path;
-        public Vector2 Position, Scale;        
-        public Rectangle SourceRect;        
+        public Vector2 Position,Scale;
+        public Rectangle SourceRect;      
         public bool IsActive;        
         public string Effects;
         public FadeEffect FadeEffect;

@@ -10,7 +10,7 @@ namespace GameTest
     /// <summary>
     /// Tiles are at the lowest of the map.
     /// </summary>
-    public class Tile
+    public class Tile : ISolid
     {
         Vector2 position;
         Rectangle sourceRect;
@@ -48,7 +48,8 @@ namespace GameTest
             {
                 return position + new Vector2(16, 16);
             }
-        }
+        }     
+
         public void CalculateFCost()
         {
             FCost = GCost + HCost;
@@ -73,31 +74,32 @@ namespace GameTest
         /// </summary>
         /// <param name="gameTime"></param>
         /// <param name="player"></param>
-        public void Update(GameTime gameTime, Player player)
+        public void Update(GameTime gameTime)//, Player player)
         {
-            if (state == "Solid" && player.KeyboardMode)
-            {
-                Rectangle tileRect = new Rectangle((int)Position.X, (int)Position.Y, sourceRect.Width, sourceRect.Height);
-                Rectangle playerRect = new Rectangle((int)player.Image.Position.X, (int)player.Image.Position.Y,
-                    player.Image.SourceRect.Width, player.Image.SourceRect.Height);
-                //Check for colision
-                if(playerRect.Intersects(tileRect))
-                {                    
-                    //if colision is detected, set the player to a obj rectangle x - player rectangle width/height
-                    if (player.Velocity.X < 0)
-                        player.Image.Position.X = tileRect.Right;
+            if (state == "Solid")// && player.KeyboardMode)
+            {                
+                Collision.Instance.CheckCollision(this);
+                //Rectangle tileRect = new Rectangle((int)Position.X, (int)Position.Y, sourceRect.Width, sourceRect.Height);
+                //Rectangle playerRect = new Rectangle((int)player.Image.Position.X, (int)player.Image.Position.Y,
+                //    player.Image.SourceRect.Width, player.Image.SourceRect.Height);
+                ////Check for colision
+                //if(playerRect.Intersects(tileRect))
+                //{                    
+                //    //if colision is detected, set the player to a obj rectangle x - player rectangle width/height
+                //    if (player.Velocity.X < 0)
+                //        player.Image.Position.X = tileRect.Right;
 
-                    else if (player.Velocity.X > 0)
-                        player.Image.Position.X = tileRect.Left - player.Image.SourceRect.Width;
+                //    else if (player.Velocity.X > 0)
+                //        player.Image.Position.X = tileRect.Left - player.Image.SourceRect.Width;
 
-                    else if (player.Velocity.Y < 0)
-                        player.Image.Position.Y = tileRect.Bottom;
+                //    else if (player.Velocity.Y < 0)
+                //        player.Image.Position.Y = tileRect.Bottom;
 
-                    else
-                        player.Image.Position.Y = tileRect.Top - player.Image.SourceRect.Height;
+                //    else
+                //        player.Image.Position.Y = tileRect.Top - player.Image.SourceRect.Height;
 
-                    player.Velocity = Vector2.Zero;
-                }
+                //    player.Velocity = Vector2.Zero;
+                //}
             }
         }        
     }
